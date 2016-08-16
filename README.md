@@ -1,5 +1,58 @@
 # GettingandCleaningData-CourseProject
-Course project for the Getting and Cleaning Data Course on Coursera
+Course project for the Getting and Cleaning Data Course on Coursera.
+
+# Uses descriptive activity names to name the activities in the data set
+# Appropriately labels the data set with descriptive variable names.
+# From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+
+# Step 1: Merge the training and the test sets to create one data set.  
+
+## Downloading the raw data set. 
+
+We'll download the raw data set to our working directory using **download.file**. The raw data set will be downloaded with the name **raw_dataset.zip**. 
+
+Once downloaded, we'll extract the all the files contained in this zip file to our working directory using **unzip**.
+
+```r
+download.file(
+    url = "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip", 
+    destfile = "raw_dataset.zip")
+
+unzip(zipfile = "raw_dataset.zip")
+```
+
+All the following steps assume the files in the raw dataset are located inside your working directory. This is very important when making references to file paths, and they are **relative**. This means a mention to "*some_file.txt*", assumes this particular file is located in your working directory and "*some_directory/other_file.txt*", assumes this directory and its contents are located inside your working directory.
+
+## Raw files and rationale on how to combine them
+The training set is divided and stored in three different files.
+
+* "*UCI HAR Dataset/test/y_test.txt*" contains the activity identifiers.
+* "*UCI HAR Dataset/test/Subject_test.txt*" contains the subject identifiers.
+* "*UCI HAR Dataset/test/x_test.txt*" contains the measurements of the feature variables.
+
+As all files have the same number of rows, so we'll use **cbind** to bind their columns in a single data set.
+
+The test set is divided and stored in the very same way, in three different files.
+
+* "*UCI HAR Dataset/test/y_test.txt*" contains the activity identifiers.
+* "*UCI HAR Dataset/test/Subject_test.txt*" contains the subject identifiers.
+* "*UCI HAR Dataset/test/x_test.txt*" contains the measurements of the feature variables.
+
+We can also combine these files with **cbind** to create a single data set.
+
+We'll have as a result two data sets, with the exact same number of columns, containing the same variables in them, in the same order.
+
+So we can then use **rbind* to bind their their rows in a single data set.
+
+## Reading and combining the raw files
+
+We'll read all the required raw files using **read.table**. 
+
+For "*UCI HAR Dataset/test/y_test.txt*" and "*UCI HAR Dataset/train/y_train.txt*" , we'll set the parameter **col.names = "Activity"**; and for "*UCI HAR Dataset/test/Subject_test.txt*" and "*UCI HAR Dataset/train/Subject_train.txt*" we set the parameter **col.names = "Subject"**. 
+
+This will prevent confusion about the contents of these columns.
+
+The following chunk of code will read, for each the training and test sets, the three raw files we need using **read.table** and bind their columns in a single data set, then bind the columns of the two resulting data sets into a single one, assigned to the **table_combined** object.
 
 ```r
 table_combined <-
@@ -21,13 +74,15 @@ table_combined <-
     )
 ```
 
+
+
+# Extract only the measurements on the mean and standard deviation for each measurement.
+
 ## Setting the name of the variables
 
-We get the variable names contained in features.text with read.table, setting
-stringAsFactors to FALSE. Since the names of the features are stored in the
-second column of features.txt, we use [, 2] in read table.
-We need to keep the names of the columns containing the Activity and Subject
-data, so we create a vector that contains "Activity", "Subject" and the
+We neeed some way to identify our variables, so we'll take the variable names contained in the file **features.text** with **read.table**, setting stringAsFactors to FALSE. Since the names of the features are stored in the second column of features.txt, we use **[, 2]** in read table.
+
+We need to keep the names of the columns containing the Activity and Subject data, so we create a vector that contains "Activity", "Subject" and the
 variable names in features.txt
 Then, we assign this vector to the function names, called on table_combined, to
 set the variable names.
@@ -41,18 +96,11 @@ names(table_combined) <-
 
 ## Selecting the variables that contain a mean or a standard deviation
 
-We use the function names to get a vector with the names of all variable names
-in table_combined. We call grep on this vector to use regular expressions for
-finding variable names that contain "mean()" and "std()" in their name.
+We use the function names to get a vector with the names of all variable names in table_combined. We call grep on this vector to use regular expressions for finding variable names that contain "mean()" and "std()" in their name.
 
-There are variables that contain "meanFreq()" in their name. We'll ignore these
-in this script, as we are requested to get "means" and "standard deviations" of
-each feature, and "meanFreq()" is an aditional and different measurement, that
-also appears in each measure.
+There are variables that contain "meanFreq()" in their name. We'll ignore these in this script, as we are requested to get "means" and "standard deviations" of each feature, and "meanFreq()" is an aditional and different measurement, that also appears in each measure.
 
-With this in mind, we call a pattern that finds either "mean()" or "std()" in
-the variable names, and create a vector with the found values, setting value =
-TRUE, so we get strings and not just positions.
+With this in mind, we call a pattern that finds either **mean()** or **std()** in the variable names, and create a vector with the found values, setting **value = TRUE**, so we get strings and not just positions.
 
 Just like the last step, we need to keep "Activity" and "Subject", so we also
 add them to this vector.
