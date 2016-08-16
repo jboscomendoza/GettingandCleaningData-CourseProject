@@ -1,10 +1,6 @@
 # GettingandCleaningData-CourseProject
 Course project for the Getting and Cleaning Data Course on Coursera.
 
-# Uses descriptive activity names to name the activities in the data set
-# Appropriately labels the data set with descriptive variable names.
-# From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-
 # Step 1: Merge the training and the test sets to create one data set.  
 
 ## Downloading the raw data set. 
@@ -74,18 +70,17 @@ table_combined <-
     )
 ```
 
-
-
-# Extract only the measurements on the mean and standard deviation for each measurement.
+# Step 2. Extract only the measurements on the mean and standard deviation for each measurement.
 
 ## Setting the name of the variables
 
-We neeed some way to identify our variables, so we'll take the variable names contained in the file **features.text** with **read.table**, setting stringAsFactors to FALSE. Since the names of the features are stored in the second column of features.txt, we use **[, 2]** in read table.
+We neeed some way to identify our variables, so we'll take the variable names contained in the file "*UCI HAR Dataset/features.text*" with **read.table**, setting the parameter **stringAsFactors = FALSE**, so we get a characters instead of factors.
 
-We need to keep the names of the columns containing the Activity and Subject data, so we create a vector that contains "Activity", "Subject" and the
-variable names in features.txt
-Then, we assign this vector to the function names, called on table_combined, to
-set the variable names.
+This will create a data frame with the names of the features stored in its second column, so we will use **[, 2]** directly on **read.table** to subset it. This will get us a vector with all the variable names corresponding to the features in the data set.
+
+We also need to keep the names of the columns containing the **Activity** and **Subject** data, so we will add them to the vector with the variable names taken from *"UCI HAR Dataset/features.txt*"
+
+Finally, we assign this resulting vector **names(table_combined)**, to set the variable names in this data set to the contents of our vector.
 
 ```r
 names(table_combined) <-
@@ -94,21 +89,19 @@ names(table_combined) <-
     )
 ```
 
-## Selecting the variables that contain a mean or a standard deviation
+## Selecting only variables containing a mean or a standard deviation of a measurement
 
-We use the function names to get a vector with the names of all variable names in table_combined. We call grep on this vector to use regular expressions for finding variable names that contain "mean()" and "std()" in their name.
+We use the **names** to get a vector with all variable names in **table_combined**, then we call **grep** on this vector to use *regular expressions* for finding variable names that contain either **mean()** (a mean value) or **std()** (a standard deviation), as described in the file "*UCI HAR Dataset/features_info.txt*"
 
-There are variables that contain "meanFreq()" in their name. We'll ignore these in this script, as we are requested to get "means" and "standard deviations" of each feature, and "meanFreq()" is an aditional and different measurement, that also appears in each measure.
+There are variables in the data set that contain **meanFreq()** in their name. We'll ignore these in this script. We are requested to get **mean** and **standard deviation** values of each feature and **meanFreq()** is an aditional and different measurement, that also appears for each feature.
 
-With this in mind, we call a pattern that finds either **mean()** or **std()** in the variable names, and create a vector with the found values, setting **value = TRUE**, so we get strings and not just positions.
+With this in mind, we'll call **grep** with a pattern that finds either **mean()** or **std()** in the variable names and the parameter **value = TRUE**, so we get a vector of characters, instead of positions, as it is the default for **grep**. When we will create a vector with the found values.
 
-Just like the last step, we need to keep "Activity" and "Subject", so we also
-add them to this vector.
+Just like the previous step, we need to keep **Activity** and **Subject**, as variable names, so we add them to this vector.
 
-We then use this vector to subset table_combined using bracket notation. We
-take advantage of bracket notation allowing us to subset columns by name, this
-way, we keep only "Activity", "Subject" and all variables containing a mean or
-a standard deviation.
+This vector is used to to subset **table_combined** with bracket notation, taking advantage of bracket notation allowing us to subset columns by name. This way, we keep only the columns named **Activity**, **Subject**, and all the variable names containing a **mean()** or **std()**.
+
+The results are assigned to **table_combined**.
 
 ```r
 table_combined <-
@@ -119,26 +112,30 @@ table_combined <-
             grep(x = names(table_combined),
                 pattern = "mean\\(\\)|std\\(\\)",
                 value = TRUE)
-          )
-        ]
+         )
+    ]
 ```
-## Reorder table_combined by "Activity", then by "Subject"
 
-We'll use the function "order" with two arguments, to sort table_combined,
-first by "Activity", and then by "Subject"
+# Step 3. Use descriptive activity names to name the activities in the data set
+
+## Reorder table_combined by Activity and then by Subject
+
+This is not a key thing to do, but makes our data set a bit easier to understand. 
+
+**order** is called on **table_combined**,  with two arguments, **table_combined[, "Activity"]** and **table_combined[, "Subject"]** to sort this data set by **Activity** and then by **Subject**.
+
+The results are assigned to **table_combined**.
 
 ```r
 table_combined <-
     table_combined[order(table_combined[, "Activity"], table_combined[, "Subject"]), ]
 ```
 
-Recode the values in the column "Activity" to descriptive ones
+## Recode the values in the column Activity to descriptive ones
 
-We'll use the contents of "UCI HAR Dataset/activity_labels.txt" as reference
-to recode the values contained in our "Activity" variable.
+The file "*UCI HAR Dataset/activity_labels.txt*" is the reference to label the values contained in our **Activity** variable.
 
-Each value corrresponds to one of six particular activities, so we replace the
-values in our "Activity" variable accordingly.
+Each numeric value from one to six corrresponds to one of particular activity, so they are replaced accordingly in our **Activity** variable. The new values will be of class **character**.
 
 ```r
 table_combined["Activity"][table_combined["Activity"] == 1] <- "WALKING"
@@ -149,6 +146,47 @@ table_combined["Activity"][table_combined["Activity"] == 5] <- "STANDING"
 table_combined["Activity"][table_combined["Activity"] == 6] <- "LAYING"
 ```
 
+# Step 4. Appropriately labels the data set with descriptive variable names.
+
+##Setting descriptive names for the variables in table_combined
+
+We'll get the columns names in **table_combined** using **name**, and assigning it to the object **newNames**.
+
+```r
+newNames <- names(table_combined)
+```
+
+We'll use regular expressions to rename the columns, matching certain patterns
+and replacing them, one at a time.
+
+The key ones are the first two replacementes, that change the start of the
+variable names to "AverageTime" and "AverageFrequency", to better reflect it's
+content.
+The rationale behind this change is the information contained in
+"UCI HAR Dataset/features_info.txt", that indicates that a "t" prefix means
+"time" and a "f" prefix means "frequency".
+
+Changes done:
+"t" at the start to "AverageTime-"
+"t" at the start to "AverageFrequency-"
+"mean()" to "Mean"
+"std"()" to "StandardDeviation"
+"Acc" to "Accelertion"
+
+```r
+newNames <- gsub(newNames, pattern = "^t", replacement = "AverageTime-")
+newNames <- gsub(newNames, pattern = "^f", replacement = "AverageFrequency-")
+
+newNames <- gsub(newNames, pattern = "mean\\(\\)", replacement = "Mean")
+newNames <- gsub(newNames, pattern = "std\\(\\)", replacement = "StandardDeviation")
+
+newNames <- gsub(newNames, pattern = "Acc", replacement = "_Acceleration")
+```
+
+We'll assign the new names to "table_summary" using "names".
+names(table_summary) <- newNames
+
+# Step 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 ## Get the average for each variable, by activity and subject.
 
 Our expected result:
@@ -194,41 +232,7 @@ table_summary <-
     )
 ```
 
-##Setting descriptive names for the variables in table_summary
 
-We'll get the columns names in table_summary using "name", and assigning it to
-the object "newNames".
-newNames <- names(table_summary)
-
-We'll use regular expressions to rename the columns, matching certain patterns
-and replacing them, one at a time.
-
-The key ones are the first two replacementes, that change the start of the
-variable names to "AverageTime" and "AverageFrequency", to better reflect it's
-content.
-The rationale behind this change is the information contained in
-"UCI HAR Dataset/features_info.txt", that indicates that a "t" prefix means
-"time" and a "f" prefix means "frequency".
-
-Changes done:
-"t" at the start to "AverageTime-"
-"t" at the start to "AverageFrequency-"
-"mean()" to "Mean"
-"std"()" to "StandardDeviation"
-"Acc" to "Accelertion"
-
-```r
-newNames <- gsub(newNames, pattern = "^t", replacement = "AverageTime-")
-newNames <- gsub(newNames, pattern = "^f", replacement = "AverageFrequency-")
-
-newNames <- gsub(newNames, pattern = "mean\\(\\)", replacement = "Mean")
-newNames <- gsub(newNames, pattern = "std\\(\\)", replacement = "StandardDeviation")
-
-newNames <- gsub(newNames, pattern = "Acc", replacement = "_Acceleration")
-```
-
-We'll assign the new names to "table_summary" using "names".
-names(table_summary) <- newNames
 
 ## Writing our tidy data set to a file
 
