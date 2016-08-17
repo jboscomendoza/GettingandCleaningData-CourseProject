@@ -183,7 +183,7 @@ The most important changes are the first two. These change the start of the vari
 
 The prefix "t" meaning time and the prefix  "f" meaning frequency is described in the file "features_info.txt".
 
-"mean()", "std()" and "-" are also changed to make them easier to read and manipulate.
+"mean()", "std()" and "-" are also changed to make them easier to read and manipulate. "BodyBody" is changed to "Body", to keep consistent variable names.
 
 Changes done:
 
@@ -192,6 +192,7 @@ Changes done:
 3. "-" to "_"
 4. "mean()" to "Mean"
 5. "std()" to "StandardDeviation"
+6. "BodyBody" to "Body"
 
 ```r
 new_names <- gsub(new_names, pattern = "^t", replacement = "AverageTime-")
