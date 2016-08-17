@@ -121,32 +121,38 @@ All variables in table_summary.txt are described according to the following sche
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
 
-18 AverageTime_BodyAccJerk_StandardDeviation_X
+18 
+* AverageTime_BodyAccJerk_StandardDeviation_X
 * Average value for the standard deviation of the body jerk accelerometer time domain signal, axis x
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
 
-19 AverageTime_BodyAccJerk_StandardDeviation_Y
+19
+* AverageTime_BodyAccJerk_StandardDeviation_Y
 * Average value for the standard deviation of the body jerk accelerometer time domain signal, axis y
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
 
-20 AverageTime_BodyAccJerk_StandardDeviation_Z
+20
+* AverageTime_BodyAccJerk_StandardDeviation_Z
 * Average value for the standard deviation of the body jerk accelerometer time domain signal, axis z
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
 
-21 AverageTime_BodyGyro_Mean_X
+21
+* AverageTime_BodyGyro_Mean_X
 * Average value for the mean of the body gyroscope time domain signal, axis x
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
 
-22 AverageTime_BodyGyro_Mean_Y
+22
+* AverageTime_BodyGyro_Mean_Y
 * Average value for the mean of the body gyroscope time domain signal, axis y
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
 
-23 AverageTime_BodyGyro_Mean_Z
+23
+* AverageTime_BodyGyro_Mean_Z
 * Average value for the mean of the body gyroscope time domain signal, axis z
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
