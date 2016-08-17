@@ -196,6 +196,7 @@ Changes done:
 ```r
 new_names <- gsub(new_names, pattern = "^t", replacement = "AverageTime-")
 new_names <- gsub(new_names, pattern = "^f", replacement = "AverageFrequency-")
+new_names <- gsub(new_names, pattern = "_", replacement = "_")
 new_names <- gsub(new_names, pattern = "mean\\(\\)", replacement = "Mean")
 new_names <- gsub(new_names, pattern = "std\\(\\)", replacement = "StandardDeviation")
 ```
