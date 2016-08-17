@@ -65,6 +65,7 @@ new_names <- gsub(new_names, pattern = "^f", replacement = "AverageFrequency_")
 new_names <- gsub(new_names, pattern = "-", replacement = "_")
 new_names <- gsub(new_names, pattern = "mean\\(\\)", replacement = "Mean")
 new_names <- gsub(new_names, pattern = "std\\(\\)", replacement = "StandardDeviation")
+new_names <- gsub(new_names, pattern = "BodyBody", replacement = "Body")
 
 names(table_summary) <- new_names
 
