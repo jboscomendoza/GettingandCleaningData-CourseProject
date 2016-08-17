@@ -1,71 +1,87 @@
-# GettingandCleaningData-CourseProject
-Course project for the Getting and Cleaning Data Course on Coursera.
+# Getting and Cleaning Data - Course Project
+*(Course project for the Getting and Cleaning Data Course on Coursera)*
+
+This readme file describes the contents and rationale of run_analysis.R, contained in this repository.
 
 # Step 1: Merge the training and the test sets to create one data set.  
 
 ## Downloading the raw data set. 
 
-We'll download the raw data set to our working directory using **download.file**. The raw data set will be downloaded with the name **raw_dataset.zip**. 
-
-Once downloaded, we'll extract the all the files contained in this zip file to our working directory using **unzip**.
+**download.file** is used to download the raw data set to your working directory as **raw_dataset.zip**. 
 
 ```r
 download.file(
     url = "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip", 
     destfile = "raw_dataset.zip")
+```
 
+Once downloaded, the files contained in **raw_dataset.zip** are extracted to your working directory using **unzip**.
+````r
 unzip(zipfile = "raw_dataset.zip")
 ```
 
-All the following steps assume the files in the raw dataset are located inside your working directory. This is very important when making references to file paths, and they are **relative**. This means a mention to "*some_file.txt*", assumes this particular file is located in your working directory and "*some_directory/other_file.txt*", assumes this directory and its contents are located inside your working directory.
+## Setting your working directory
 
-## Raw files and rationale on how to combine them
-The training set is divided and stored in three different files.
+Extracting **raw_dataset.zip** creates a directory called "*UCI HAR Dataset*". 
 
-* "*UCI HAR Dataset/test/y_test.txt*" contains the activity identifiers.
-* "*UCI HAR Dataset/test/Subject_test.txt*" contains the subject identifiers.
-* "*UCI HAR Dataset/test/x_test.txt*" contains the measurements of the feature variables.
+For convenience in locating the files that are required for this script the working directory will be changed to this directory with **setwd()**
 
-As all files have the same number of rows, so we'll use **cbind** to bind their columns in a single data set.
+```r
+setwd("UCI HAR Dataset")
+```
 
-The test set is divided and stored in the very same way, in three different files.
+## Raw files in the UCI HAR Dataset and rationale on how to combine them
 
-* "*UCI HAR Dataset/test/y_test.txt*" contains the activity identifiers.
-* "*UCI HAR Dataset/test/Subject_test.txt*" contains the subject identifiers.
-* "*UCI HAR Dataset/test/x_test.txt*" contains the measurements of the feature variables.
+The "*UCI HAR Dataset*" directory, now your working directory contains two subdirectories, "*train*" and "*set*", each one containing a subset of the raw data.
 
-We can also combine these files with **cbind** to create a single data set.
+The **training** set is located in "*train*", it's divided and stored in three different files.
 
-We'll have as a result two data sets, with the exact same number of columns, containing the same variables in them, in the same order.
+* "*train/y_train.txt*" containing the activity identifiers.
+* "*train/Subject_train.txt*" containing the subject identifiers.
+* "*train/x_train.txt*" containing the measurements of the feature variables.
 
-So we can then use **rbind* to bind their their rows in a single data set.
+All these files have the same number of rows, so **cbind** is used bind their columns in a single data set.
+
+The **test** set is divided and stored in the same way in *"test"*.
+
+* "*test/y_test.txt*" containing the activity identifiers.
+* "*test/Subject_test.txt*" containing the subject identifiers.
+* "*test/x_test.txt*" containing the measurements of the feature variables.
+
+These files are also combined using **cbind** to create a single data set.
+
+This results in two data sets, with the exact same number of columns, containing the same variables, in the same order.
+
+Then **rbind* is used to bind their their rows in a single data set.
 
 ## Reading and combining the raw files
 
-We'll read all the required raw files using **read.table**. 
+The required raw files are read using **read.table**. 
 
-For "*UCI HAR Dataset/test/y_test.txt*" and "*UCI HAR Dataset/train/y_train.txt*" , we'll set the parameter **col.names = "Activity"**; and for "*UCI HAR Dataset/test/Subject_test.txt*" and "*UCI HAR Dataset/train/Subject_train.txt*" we set the parameter **col.names = "Subject"**. 
+For "*test/y_test.txt*" and "*train/y_test.txt*" , we set the parameter **col.names = "Activity"**; and for "*test/Subject_text.txt*" and "*train/Subject_train.txt*" we set the parameter **col.names = "Subject"**. 
 
-This will prevent confusion about the contents of these columns.
+This prevents confusion about the contents of these files.
 
-The following chunk of code will read, for each the training and test sets, the three raw files we need using **read.table** and bind their columns in a single data set, then bind the columns of the two resulting data sets into a single one, assigned to the **table_combined** object.
+For the training and test sets, the three raw files are read using  **read.table**, then their columns are bound in a single data set, and finally, the rows of the two resulting data sets are bound into a single one.
+
+The results of this are assigned to the object called **table_combined**.
 
 ```r
 table_combined <-
     rbind(
         cbind(
-            read.table(file = "UCI HAR Dataset/test/y_test.txt",
+            read.table(file = "test/y_test.txt",
                 col.names = "Activity"),
-            read.table(file = "UCI HAR Dataset/test/Subject_test.txt",
+            read.table(file = "test/Subject_test.txt",
                 col.names = "Subject"),
-            read.table(file = "UCI HAR Dataset/test/x_test.txt")
+            read.table(file = "test/x_test.txt")
         ),
         cbind(
-            read.table(file = "UCI HAR Dataset/train/y_train.txt",
+            read.table(file = "train/y_train.txt",
                 col.names = "Activity"),
-            read.table(file = "UCI HAR Dataset/train/Subject_train.txt",
+            read.table(file = "train/Subject_train.txt",
                 col.names = "Subject"),
-            read.table(file = "UCI HAR Dataset/train/x_train.txt")
+            read.table(file = "train/x_train.txt")
         )
     )
 ```
@@ -74,18 +90,22 @@ table_combined <-
 
 ## Setting the name of the variables
 
-We neeed some way to identify our variables, so we'll take the variable names contained in the file "*UCI HAR Dataset/features.text*" with **read.table**, setting the parameter **stringAsFactors = FALSE**, so we get a characters instead of factors.
+The variable names contained in the file "*features.txt*" are used to name the variables in **table_combined**.
 
-This will create a data frame with the names of the features stored in its second column, so we will use **[, 2]** directly on **read.table** to subset it. This will get us a vector with all the variable names corresponding to the features in the data set.
+"*features.txt*" is read with **read.table** setting the parameter **stringAsFactors = FALSE**, so the text strings are read as values of class character.  
 
-We also need to keep the names of the columns containing the **Activity** and **Subject** data, so we will add them to the vector with the variable names taken from *"UCI HAR Dataset/features.txt*"
+This creates a data frame with the names of the variables stored in its **second column**. so bracket notation is used (**[, 2]**) directly on **read.table** to subset it, and extract its contents. 
 
-Finally, we assign this resulting vector **names(table_combined)**, to set the variable names in this data set to the contents of our vector.
+The result is a  vector with all the variable names of the features in our data set.
+
+To keep the names of the columns containing the **Activity** and **Subject** data, these two values are added to the vector with the variable names taken from *"features.txt*"
+
+Finally, the resulting vector is assigned to **names(table_combined)** to change the variable names in **table_combined**.
 
 ```r
 names(table_combined) <-
     c("Activity", "Subject",
-        read.table("UCI HAR Dataset/features.txt", stringsAsFactors = F)[, 2]
+        read.table("features.txt", stringsAsFactors = F)[, 2]
     )
 ```
 
