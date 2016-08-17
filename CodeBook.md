@@ -37,125 +37,360 @@ Column number
 * Numeric
 * Identifier for each of thirty participants: 1 to 30, only integers.
 
-
 3
 * AverageTime_BodyAcc_Mean_X
-* Average value for the mean of the body accelerometer time signal, axis X
+* Average value for the mean of the body accelerometer time domain signal, axis X
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
 
 4 
 * AverageTime_BodyAcc_Mean_Y
-* Average value for the mean of the body accelerometer time signal, axis Y
+* Average value for the mean of the body accelerometer time domain signal, axis Y
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
 
 5
 * AverageTime_BodyAcc_Mean_Z
-* Average value for the mean of the body accelerometer time signal, axis z
+* Average value for the mean of the body accelerometer time domain signal, axis z
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
 
- 6 AverageTime_BodyAcc_StandardDeviation_X
- 7 AverageTime_BodyAcc_StandardDeviation_Y
- 8 AverageTime_BodyAcc_StandardDeviation_Z
+6 AverageTime_BodyAcc_StandardDeviation_X
+* Average value for the standard deviation of the body accelerometer time domain signal, axis x
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+7 AverageTime_BodyAcc_StandardDeviation_Y
+* Average value for the standard deviation of the body accelerometer time domain signal, axis y
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+8 AverageTime_BodyAcc_StandardDeviation_Z
+* Average value for the standard deviation of the body accelerometer time domain signal, axis z
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
  
 9 
 * AverageTime_GravityAcc_Mean_X
-* Average value for the mean of the gravity accelerometer time signal, axis x
+* Average value for the mean of the gravity accelerometer time domain signal, axis x
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
  
 10
 * AverageTime_GravityAcc_Mean_Y
-* Average value for the mean of the gravity accelerometer time signal, axis y
+* Average value for the mean of the gravity accelerometer time domain signal, axis y
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
 
 11
 * AverageTime_GravityAcc_Mean_Z
-* Average value for the mean of the gravity accelerometer time signal, axis z
+* Average value for the mean of the gravity accelerometer time domain signal, axis z
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
 
 12 AverageTime_GravityAcc_StandardDeviation_X
+* Average value for the standard deviation of the gravity accelerometer time domain signal, axis x
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
 13 AverageTime_GravityAcc_StandardDeviation_Y
+* Average value for the standard deviation of the gravity accelerometer time domain signal, axis y
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
 14 AverageTime_GravityAcc_StandardDeviation_Z
+* Average value for the standard deviation of the gravity accelerometer time domain signal, axis z
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
 
 15 
 * AverageTime_BodyAccJerk_Mean_X
-* Average value for the mean of the body jerk accelerometer time signal, axis x
+* Average value for the mean of the body jerk accelerometer time domain signal, axis x
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
 
 16 
 * AverageTime_BodyAccJerk_Mean_Y
-* Average value for the mean of the body jerk accelerometer time signal, axis y
+* Average value for the mean of the body jerk accelerometer time domain signal, axis y
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
 
 17
 * AverageTime_BodyAccJerk_Mean_Z
-* Average value for the mean of the body jerk accelerometer time signal, axis z
+* Average value for the mean of the body jerk accelerometer time domain signal, axis z
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
 
 18 AverageTime_BodyAccJerk_StandardDeviation_X
+* Average value for the standard deviation of the body jerk accelerometer time domain signal, axis x
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
 19 AverageTime_BodyAccJerk_StandardDeviation_Y
+* Average value for the standard deviation of the body jerk accelerometer time domain signal, axis y
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
 20 AverageTime_BodyAccJerk_StandardDeviation_Z
+* Average value for the standard deviation of the body jerk accelerometer time domain signal, axis z
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
 
 21 AverageTime_BodyGyro_Mean_X
-* Average value for the mean of the body jerk accelerometer time signal, axis x
+* Average value for the mean of the body gyroscope time domain signal, axis x
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
 
 22 AverageTime_BodyGyro_Mean_Y
+* Average value for the mean of the body gyroscope time domain signal, axis y
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
 23 AverageTime_BodyGyro_Mean_Z
-24 AverageTime_BodyGyro_StandardDeviation_X
-25 AverageTime_BodyGyro_StandardDeviation_Y
-26 AverageTime_BodyGyro_StandardDeviation_Z
-27 AverageTime_BodyGyroJerk_Mean_X
-28 AverageTime_BodyGyroJerk_Mean_Y
-29 AverageTime_BodyGyroJerk_Mean_Z
-30 AverageTime_BodyGyroJerk_StandardDeviation_X
-31 AverageTime_BodyGyroJerk_StandardDeviation_Y
-32 AverageTime_BodyGyroJerk_StandardDeviation_Z
-33 AverageTime_BodyAccMag_Mean
-34 AverageTime_BodyAccMag_StandardDeviation
-35 AverageTime_GravityAccMag_Mean
-36 AverageTime_GravityAccMag_StandardDeviation
-37 AverageTime_BodyAccJerkMag_Mean
-38 AverageTime_BodyAccJerkMag_StandardDeviation
-39 AverageTime_BodyGyroMag_Mean
-40 AverageTime_BodyGyroMag_StandardDeviation
-41 AverageTime_BodyGyroJerkMag_Mean
-42 AverageTime_BodyGyroJerkMag_StandardDeviation
+* Average value for the mean of the body gyroscope time domain signal, axis z
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+24 
+* AverageTime_BodyGyro_StandardDeviation_X
+* Average value for the standard deviation of the body gyroscope time domain signal, axis x
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+25
+* AverageTime_BodyGyro_StandardDeviation_Y
+* Average value for the standard deviation of the body gyroscope time domain signal, axis y
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+26
+* AverageTime_BodyGyro_StandardDeviation_Z
+* Average value for the standard deviation of the body gyroscope time domain signal, axis z
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+27
+* AverageTime_BodyGyroJerk_Mean_X
+* Average value for the mean of the body gyroscope jerk time domain signal, axis x
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+28
+* AverageTime_BodyGyroJerk_Mean_Y
+* Average value for the mean of the body gyroscope jerk time domain signal, axis y
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+29
+* AverageTime_BodyGyroJerk_Mean_Z
+* Average value for the mean of the body gyroscope jerk time domain signal, axis z
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+30
+* AverageTime_BodyGyroJerk_StandardDeviation_X
+* Average value for the standard deviation of the body gyroscope jerk time domain signal, axis z
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+31
+* AverageTime_BodyGyroJerk_StandardDeviation_Y
+* Average value for the standard deviation of the body gyroscope jerk time domain signal, axis z
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+32
+* AverageTime_BodyGyroJerk_StandardDeviation_Z
+* Average value for the standard deviation of the body gyroscope jerk time domain signal, axis z
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+33 
+* AverageTime_BodyAccMag_Mean
+* Average value for the mean of the body accelerometer time domain signal magnitude
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+34 
+* AverageTime_BodyAccMag_StandardDeviation
+* Average value for the standard deviation of the body accelerometer time domain signal magnitude
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+35
+* AverageTime_GravityAccMag_Mean
+* Average value for the mean of the gravity accelerometer time domain signal magnitude
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+36 
+* AverageTime_GravityAccMag_StandardDeviation
+* Average value for the standard deviation of the gravity accelerometer time domain signal magnitude
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+37
+* AverageTime_BodyAccJerkMag_Mean
+* Average value for the mean of the body accelerometer jerk time domain signal magnitude
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+38
+* AverageTime_BodyAccJerkMag_StandardDeviation
+* Average value for the standard deviation of the body accelerometer jerk time domain signal magnitude
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+39
+* AverageTime_BodyGyroMag_Mean
+* Average value for the mean of the body gyroscope time domain signal magnitude
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+40
+* AverageTime_BodyGyroMag_StandardDeviation
+* Average value for the standard deviation of the body gyroscope time domain signal magnitude
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+41 
+* AverageTime_BodyGyroJerkMag_Mean
+* Average value for the mean of the body gyroscope jerk time domain signal magnitude
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
+42
+* AverageTime_BodyGyroJerkMag_StandardDeviation
+* Average value for the standard deviation of the body gyroscope jerk time domain signal magnitude
+* Numeric
+* Standarized time values, mean 0, standard deviation 1
+
 43 AverageFrequency_BodyAcc_Mean_X
+* Average value for the mean of the body accelerometer frequency domain signal, axis x
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
 44 AverageFrequency_BodyAcc_Mean_Y
+* Average value for the mean of the body accelerometer frequency domain signal, axis y
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
 45 AverageFrequency_BodyAcc_Mean_Z
+* Average value for the mean of the body accelerometer frequency domain signal, axis z
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
 46 AverageFrequency_BodyAcc_StandardDeviation_X
+* Average value for the standard deviation of the body accelerometer frequency domain signal, axis x
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
 47 AverageFrequency_BodyAcc_StandardDeviation_Y
+* Average value for the standard deviation of the body accelerometer frequency domain signal, axis y
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
 48 AverageFrequency_BodyAcc_StandardDeviation_Z
+* Average value for the standard deviation of the body accelerometer frequency domain signal, axis z
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+* 
 49 AverageFrequency_BodyAccJerk_Mean_X
+* Average value for the mean of the body accelerometer jerk frequency domain signal, axis x
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
 50 AverageFrequency_BodyAccJerk_Mean_Y
+* Average value for the mean of the body accelerometer jerk frequency domain signal, axis y
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
 51 AverageFrequency_BodyAccJerk_Mean_Z
+* Average value for the mean of the body accelerometer jerk frequency domain signal, axis z
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
 52 AverageFrequency_BodyAccJerk_StandardDeviation_X
+* Average value for the standard deviation of the body accelerometer jerk frequency domain signal, axis x
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
 53 AverageFrequency_BodyAccJerk_StandardDeviation_Y
+* Average value for the standard deviation of the body accelerometer jerk frequency domain signal, axis y
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
 54 AverageFrequency_BodyAccJerk_StandardDeviation_Z
+* Average value for the standard deviation of the body accelerometer jerk frequency domain signal, axis z
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
 55 AverageFrequency_BodyGyro_Mean_X
+* Average value for the mean of the body gyroscope frequency domain signal, axis x
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
 56 AverageFrequency_BodyGyro_Mean_Y
+* Average value for the mean of the body gyroscope frequency domain signal, axis y
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
 57 AverageFrequency_BodyGyro_Mean_Z
+* Average value for the mean of the body gyroscope frequency domain signal, axis z
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
 58 AverageFrequency_BodyGyro_StandardDeviation_X
+* Average value for the standard deviation of the body gyroscope frequency domain signal, axis x
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
 59 AverageFrequency_BodyGyro_StandardDeviation_Y
+* Average value for the standard deviation of the body gyroscope frequency domain signal, axis y
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
 60 AverageFrequency_BodyGyro_StandardDeviation_Z
+* Average value for the standard deviation of the body gyroscope frequency domain signal, axis z
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
 61 AverageFrequency_BodyAccMag_Mean
+* Average value for the mean of the body accelerometer frequency domain signal magnitude
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
 62 AverageFrequency_BodyAccMag_StandardDeviation
-63 AverageFrequency_BodyBodyAccJerkMag_Mean
-64 AverageFrequency_BodyBodyAccJerkMag_StandardDeviation
-65 AverageFrequency_BodyBodyGyroMag_Mean
-66 AverageFrequency_BodyBodyGyroMag_StandardDeviation
-67 AverageFrequency_BodyBodyGyroJerkMag_Mean
-68 AverageFrequency_BodyBodyGyroJerkMag_StandardDeviation
+* Average value for the standard deviation of the body accelerometer time domain signal magnitude
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
 
+63 AverageFrequency_BodyAccJerkMag_Mean
+* Average value for the mean of the body accelerometer jerk frequency domain signal magnitude
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
 
+64 AverageFrequency_BodyAccJerkMag_StandardDeviation
+* Average value for the standard deviation of the body accelerometer jerk frequency domain signal magnitude
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
 
+65 AverageFrequency_BodyGyroMag_Mean
+* Average value for the mean of the body gyroscope frequency domain signal magnitude
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
+66 AverageFrequency_BodyGyroMag_StandardDeviation
+* Average value for the standard deviation of the body gyroscope frequency domain signal magnitude
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
+67 AverageFrequency_BodyGyroJerkMag_Mean
+* Average value for the mean of the body gyroscope jerk frequency domain signal magnitude
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
+
+68 AverageFrequency_BodyGyroJerkMag_StandardDeviation
+* Average value for the standard deviation of the body gyroscope jerk frequency domain signal magnitude
+* Numeric
+* Standarized frequency values, mean 0, standard deviation 1
