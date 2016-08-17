@@ -28,7 +28,7 @@ Extracting **raw_dataset.zip** creates a directory called "*UCI HAR Dataset*".
 For convenience in locating the files that are required for this script the working directory will be changed to this directory with **setwd()**
 
 ```r
-setwd("UCI HAR Dataset")
+setwd("UCI HAR Dataset/")
 ```
 
 ## Raw files in the UCI HAR Dataset and rationale on how to combine them
@@ -186,6 +186,7 @@ The prefix "t" meaning time and the prefix  "f" meaning frequency is described i
 "mean()", "std()" and "-" are also changed to make them easier to read and manipulate.
 
 Changes done:
+
 1. "t" at the start to "AverageTime_"
 2. "f" at the start to "AverageFrequency_"
 3. "-" to "_"
