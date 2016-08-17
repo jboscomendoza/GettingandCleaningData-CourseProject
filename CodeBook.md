@@ -55,17 +55,20 @@ All variables in table_summary.txt are described according to the following sche
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
 
-6 AverageTime_BodyAcc_StandardDeviation_X
+6 
+* AverageTime_BodyAcc_StandardDeviation_X
 * Average value for the standard deviation of the body accelerometer time domain signal, axis x
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
 
-7 AverageTime_BodyAcc_StandardDeviation_Y
+7 
+* AverageTime_BodyAcc_StandardDeviation_Y
 * Average value for the standard deviation of the body accelerometer time domain signal, axis y
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
 
-8 AverageTime_BodyAcc_StandardDeviation_Z
+8 
+* AverageTime_BodyAcc_StandardDeviation_Z
 * Average value for the standard deviation of the body accelerometer time domain signal, axis z
 * Numeric
 * Standarized time values, mean 0, standard deviation 1
