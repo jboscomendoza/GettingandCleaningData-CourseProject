@@ -4,27 +4,29 @@ download.file(
 
 unzip(zipfile = "raw_dataset.zip")
 
+setwd("UCI HAR Dataset/")
+
 table_combined <-
     rbind(
         cbind(
-            read.table(file = "UCI HAR Dataset/test/y_test.txt",
+            read.table(file = "test/y_test.txt",
                 col.names = "Activity"),
-            read.table(file = "UCI HAR Dataset/test/Subject_test.txt",
+            read.table(file = "test/Subject_test.txt",
                 col.names = "Subject"),
-            read.table(file = "UCI HAR Dataset/test/x_test.txt")
+            read.table(file = "test/x_test.txt")
         ),
         cbind(
-            read.table(file = "UCI HAR Dataset/train/y_train.txt",
+            read.table(file = "train/y_train.txt",
                 col.names = "Activity"),
-            read.table(file = "UCI HAR Dataset/train/Subject_train.txt",
+            read.table(file = "train/Subject_train.txt",
                 col.names = "Subject"),
-            read.table(file = "UCI HAR Dataset/train/x_train.txt")
+            read.table(file = "train/x_train.txt")
         )
     )
 
 names(table_combined) <-
     c("Activity", "Subject",
-        read.table("UCI HAR Dataset/features.txt", stringsAsFactors = F)[, 2]
+        read.table("features.txt", stringsAsFactors = F)[, 2]
     )
 
 table_combined <-
@@ -56,15 +58,15 @@ table_summary <-
         funs(mean)
     )
 
-newNames <- names(table_summary)
+new_names <- names(table_summary)
 
-newNames <- gsub(newNames, pattern = "^t", replacement = "AverageTime-")
-newNames <- gsub(newNames, pattern = "^f", replacement = "AverageFrequency-")
-newNames <- gsub(newNames, pattern = "mean\\(\\)", replacement = "Mean")
-newNames <- gsub(newNames, pattern = "std\\(\\)", replacement = "StandardDeviation")
-newNames <- gsub(newNames, pattern = "Acc", replacement = "_Acceleration")
+new_names <- gsub(new_names, pattern = "^t", replacement = "AverageTime_")
+new_names <- gsub(new_names, pattern = "^f", replacement = "AverageFrequency_")
+new_names <- gsub(new_names, pattern = "-", replacement = "_")
+new_names <- gsub(new_names, pattern = "mean\\(\\)", replacement = "Mean")
+new_names <- gsub(new_names, pattern = "std\\(\\)", replacement = "StandardDeviation")
 
-names(table_summary) <- newNames
+names(table_summary) <- new_names
 
 write.table(table_summary, file = "table_summary.txt", row.names = FALSE)
 
