@@ -146,83 +146,87 @@ table_combined["Activity"][table_combined["Activity"] == 5] <- "STANDING"
 table_combined["Activity"][table_combined["Activity"] == 6] <- "LAYING"
 ```
 
-# Step 4. Appropriately labels the data set with descriptive variable names.
+# Step 4. Appropriately label the data set with descriptive variable names.
 
 ##Setting descriptive names for the variables in table_combined
 
-We'll get the columns names in **table_combined** using **name**, and assigning it to the object **newNames**.
+The columns names in **table_combined** are retrieved using **name** and assigned to the object **newNames**.
 
 ```r
-newNames <- names(table_combined)
+new_names <- names(table_combined)
 ```
 
-We'll use regular expressions to rename the columns, matching certain patterns
-and replacing them, one at a time.
+Regular expressions are used to change the variable names contained in **new_names**, matching and replacing patterns one at a time.
 
-The key ones are the first two replacementes, that change the start of the
-variable names to "AverageTime" and "AverageFrequency", to better reflect it's
-content.
-The rationale behind this change is the information contained in
-"UCI HAR Dataset/features_info.txt", that indicates that a "t" prefix means
-"time" and a "f" prefix means "frequency".
+The key changes are the first two. These change the start of the variable names from "t.."to "AverageTime_..." and from "f..." to "AverageFrequency..". This is done to better reflect their final content, the average of measurements for each variable.
+
+The prefix "t" meaning time and the prefix  "f" meaning frequency is described in the file "UCI HAR Dataset/features_info.txt".
 
 Changes done:
-"t" at the start to "AverageTime-"
-"t" at the start to "AverageFrequency-"
-"mean()" to "Mean"
-"std"()" to "StandardDeviation"
-"Acc" to "Accelertion"
+* "t" at the start to "AverageTime_"
+* "f" at the start to "AverageFrequency_"
+* "-" to "_"
+* "mean()" to "Mean"
+* "std"()" to "StandardDeviation"
 
 ```r
-newNames <- gsub(newNames, pattern = "^t", replacement = "AverageTime-")
-newNames <- gsub(newNames, pattern = "^f", replacement = "AverageFrequency-")
+new_names <- gsub(new_names, pattern = "^t", replacement = "AverageTime-")
+new_names <- gsub(new_names, pattern = "^f", replacement = "AverageFrequency-")
 
-newNames <- gsub(newNames, pattern = "mean\\(\\)", replacement = "Mean")
-newNames <- gsub(newNames, pattern = "std\\(\\)", replacement = "StandardDeviation")
+new_names <- gsub(new_names, pattern = "mean\\(\\)", replacement = "Mean")
+new_names <- gsub(new_names, pattern = "std\\(\\)", replacement = "StandardDeviation")
 
-newNames <- gsub(newNames, pattern = "Acc", replacement = "_Acceleration")
+new_names <- gsub(new_names, pattern = "Acc", replacement = "_Acceleration")
 ```
 
-We'll assign the new names to "table_summary" using "names".
-names(table_summary) <- newNames
+**names** is used to assign the new variable names contained in **new_names** to **table_combined**.
+
+```r
+names(table_combined) <- new_names
+```
 
 # Step 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-## Get the average for each variable, by activity and subject.
 
-Our expected result:
-We'll get one average value for each value using the function mean. As we are
-requested, we'll group our data by activity, and then compute the average value
-for each subject in that group for each variable.
+## Goal: a tidy data set
+A data set where each column represents average values for each variable, for each activity, and each subject. The average will be computed using **mean**. 
 
-We have 6 activities and 30 subjects so we'll end up with 6 * 30 = 180 rows.
-We have 66 variables corresponding to a feature, so well have one column to
-indicate activity, one to indicate the subject and 66 columns, containing the
-average value of each feature for that activity and subject, that is
- 1 + 1 + 66 = 68 columns.
+The observations in **table values will be grouped by activity and then by subject.
 
-##Summarising with dplyr
-We'll use the dplyr package to summarise table_combined.
+There are 6 activities and 30 subjects, this is 180 groups by activity and subject or 6 * 30 = 180 rows.
 
-We'll use the function "require" instead of "library" to load dplyr in our
-eviroment. This is because "require", when called, besides loading a package,
-returns a TRUE value if succeded, or a FALSE value if the package couldn't be
-found, likely because it's not installed.
+There are 66 variables corresponding to measurements of a feature in **table_combined**, plus 1 column to identify activity, plus 1 to identify  subjects, this is 68 columns. 
 
-We'll take advantage of this using an if statement. If require("dplyr") returns
-a FALSE, then it calls "install.packages" to download or install it.
+Then, for the average of each variable of a measurement, there will a singular value for each group of activity and subject. 
+
+That is, a **tidy data set** with 180 rows and 68 columns (180 * 68), where each row is a single, unique observation, each column is a single, unique variable, and each cell is a single, unique value. 
+
+## Loading (or installing) dplyr
+
+The dplyr package will be used to create groups and to compute summary statistics for them.
+
+**require** will be used instead of **library** to load **dplyr** in our
+enviroment.
+
+When **require** is called it attempts to load a package, returning a **TRUE** value if succeeds in doing so, or a **FALSE** value if it fails, often because the solicited package is not installed.
+
+Using an **if** statement to take advantage of these behavior, **require("dplyr")** will be called, if it returns
+a **FALSE** value, then **install.packages** will be called to download or install **dplyr**.
 
 ```r
 if(!require("dplyr")) install.packages("dplyr")
 ```
 
-Once dplyr is loaded, we'll use the function group_by to group table_combined
-by "Activity" and then by "Subject".
+## Grouping and summarising the data
 
-We'll pass this grouped table as an argument to the function "summarise_each".
-This function returns a summary statistic for each column and each group, in
-this case, the argument "funs(mean)" will call the function "mean".
+Once dplyr is loaded, **group_by** will be used to create groups in **table_combined** by **Activity** and then by **Subject**.
 
-We'll assign the result of this computation to the object "table_summary".
+This grouped **table_combined** will be passed as the **tbl** argument to **summarise_each**.
+
+**summarise_each** asks for a **funs** argument, this is a function for a summary statistic that will be computed for each columnn in a given data set. In this case, **mean** is called to compute average values.
+
+Since the **tbl** argument is a grouped data set, then **mean** is computed by group of activity and then subject, resulting in a tidy data set with 180 rows and 68 columns.
+
+The results are assigned to a new object called **table_summary**.
 
 ```r
 table_summary <-
@@ -232,13 +236,10 @@ table_summary <-
     )
 ```
 
-
-
 ## Writing our tidy data set to a file
 
-We'll use the function "write.table" to write "summary_table" to a text file
-"table_summary.txt". The argument "row.names = FALSE" prevents writing an extra
-column to this file, cointaining the row numbers.
+
+**write.table** is used to write "summary_table" to a plain text file called **table_summary.txt**. The parameter **row.names = FALSE** is set to prevent writing an extra column with row numbers.
 
 ```r
 write.table(table_summary, file = "table_summary.txt", row.names = FALSE)
@@ -246,8 +247,7 @@ write.table(table_summary, file = "table_summary.txt", row.names = FALSE)
 
 ## Reading our tidy data set from a file
 
-Once we saved our data set, we can read it from a file using "read.table"
-with the argument header = TRUE, to properly read the column names.
+Once saved to a file, this tidy data set can be read using **read.table** with the parameter **header = TRUE**, so to properly read the column names.
 
 ```r
 read.table("table_summary.txt", header = TRUE)
